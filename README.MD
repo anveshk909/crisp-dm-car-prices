@@ -1,4 +1,3 @@
-
 # **Used Car Price Analysis**
 
 ## **Overview**
@@ -28,7 +27,7 @@ The project follows the CRISP-DM process:
 2. **Data Understanding**: Explore the dataset, handle missing values, and clean the data.
 3. **Data Preparation**: Encode categorical variables and prepare the data for modeling.
 4. **Modeling**: Implement machine learning models, including Linear Regression and Random Forest.
-5. **Evaluation**: Evaluate models using MAE and RMSE to compare performance.
+5. **Evaluation**: Evaluate models using MSE and R² to compare performance.
 6. **Deployment**: Provide insights and recommendations for the dealership.
 
 ## **Key Findings**
@@ -38,56 +37,33 @@ The project follows the CRISP-DM process:
 4. **Year of Manufacture**: Newer cars generally sell for higher prices.
 
 ## **Modeling Results**
-- **Linear Regression**: MAE = \$6410.75, RMSE = \$10,550.80
-- **Random Forest**: MAE = \$4179.79, RMSE = \$6,892.46
+- **Linear Regression**:
+  - MSE: 392,759,282,734,217.25
+  - R²: -0.0033
+- **Random Forest**:
+  - Best Params: {'model__n_estimators': 200, 'model__min_samples_split': 2, 'model__max_depth': 10}
+  - MSE: 404,233,406,108,775.56
+  - R²: -0.0326
+- **Voting Regressor**:
+  - MSE: 395,302,296,287,610.3
+  - R²: -0.0098
+- **Cross-Validation (Voting Regressor)**:
+  - Cross-Validation R² Scores: [-0.0472, -0.0110, -0.0070]
+  - Mean Cross-Validation R²: -0.0217
 
-The Random Forest model performs better than Linear Regression, as it captures non-linear relationships between variables.
-
-## **Recommendations**
-- Focus on acquiring low-mileage cars in excellent condition.
-- Target premium brands for higher profit margins.
-- Adjust pricing strategy based on mileage, brand, and condition for better customer targeting.
-
-## **Next Steps**
-- Further fine-tuning of the Random Forest model using GridSearchCV or advanced hyperparameter tuning.
-- Additional feature engineering, such as including external factors like regional demand or seasonal effects, to enhance the model's predictive power.
-
-
-
-
-# **Used Car Price Prediction**
-
-## **Overview**
-This project explores the factors that influence used car prices. A dataset containing 426,000 car listings is analyzed to identify key factors such as mileage, brand, condition, and more that affect car prices. Using machine learning models, including Linear Regression and Random Forest, we aim to provide predictive insights for a used car dealership.
-
-## **CRISP-DM Framework**
-This project follows the CRISP-DM framework:
-1. **Business Understanding**: Understand the factors that drive car prices.
-2. **Data Understanding**: Explore the dataset to identify trends and quality issues.
-3. **Data Preparation**: Handle missing values, encode categorical variables, and clean the data.
-4. **Modeling**: Build and evaluate machine learning models.
-5. **Evaluation**: Assess model performance using metrics such as MAE and RMSE.
-6. **Deployment**: Provide actionable insights for the used car dealership.
-
-## **Key Findings**
-1. **Mileage**: Lower mileage correlates with higher prices.
-2. **Manufacturer**: Premium brands like Audi and BMW command higher prices.
-3. **Condition**: Cars in better condition fetch significantly higher prices.
-4. **Year of Manufacture**: Newer cars generally have higher prices.
-
-## **Models Used**
-- **Linear Regression**: MAE = \$6410.75, RMSE = \$10,550.80
-- **Random Forest**: MAE = \$4179.79, RMSE = \$6,892.46
+The models are currently not performing well, as indicated by the negative R² values and high MSE. This suggests that the models are not capturing the relationships between features and car prices effectively.
 
 ## **Recommendations**
-- Prioritize acquiring low-mileage cars in good or excellent condition.
-- Focus on premium brands for higher profitability.
-- Adjust pricing strategy based on the model's insights to maximize returns.
+- **Feature Engineering**: Introduce additional features such as regional demand, seasonal trends, or safety ratings, which may provide a more accurate representation of factors affecting price.
+- **Data Quality**: Ensure that the data is clean and free of outliers. Consider using techniques like robust scaling or outlier removal.
+- **Hyperparameter Tuning**: Perform a more thorough search for optimal hyperparameters (e.g., using **RandomizedSearchCV** or **Bayesian optimization**).
+- **Advanced Models**: Experiment with other models, such as **Gradient Boosting**, **XGBoost**, or **LightGBM**, to potentially further improve the accuracy of price predictions.
+- **Ensemble Methods**: Try different ensemble methods like stacking or blending, which might improve performance.
 
 ## **Next Steps**
-- Fine-tune the models further using GridSearchCV and additional features.
-- Consider external factors such as demand and seasonal trends to improve predictions.
-
-## **Instructions**
-- Clone this repository and run the notebook to reproduce the analysis.
-- Ensure the `vehicles.csv` dataset is available in the same directory.
+- **Model Integration**: Integrate the Random Forest model into the dealership's inventory management system to assist in real-time price predictions based on key features such as mileage, year, and manufacturer.
+- **Price Recommendation Tool**: Develop a tool that uses the model's predictions to provide recommended price ranges for cars based on their features. This can help sales teams set competitive and profitable prices.
+- **Feature Expansion**: Consider adding additional features like regional demand, safety ratings, and consumer reviews to improve the model's predictive power. This could further refine the dealership's pricing strategy.
+- **Monitoring and Continuous Improvement**: As new data comes in, the model should be continuously updated and retrained to ensure that it stays accurate and reflects market trends.
+- **User Training**: Train the dealership staff on how to use the new tools and interpret the model's predictions. This will ensure that they can make informed decisions based on the model's output.
+- **Feedback Loop**: Establish a feedback loop where the sales team can provide insights on the model's performance and suggest areas for improvement. This will help in refining the model and making it more robust over time.
